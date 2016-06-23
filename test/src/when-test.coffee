@@ -65,6 +65,19 @@ describe 'when', ->
     When -> try @testDouble(42) catch e then @result = e
     Then -> @error == @result
 
+  if global.Promise?
+    describe 'stubbing promise returns', ->
+      context 'native promise', ->
+        describe 'resolved', ->
+          Given -> td.when(@testDouble(38)).thenResolve('M')
+          When (done) -> @testDouble(38).then (@resolved) => done()
+          Then -> @resolved == 'M'
+
+        describe 'rejected', ->
+          Given -> td.when(@testDouble(38)).thenReject('M')
+          When (done) -> @testDouble(38).catch (@rejected) => done()
+          Then -> @rejected == 'M'
+
   describe 'stubbing error, no invocation found', ->
     Given -> td.reset()
     Given -> try

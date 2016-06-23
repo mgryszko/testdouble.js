@@ -13,6 +13,10 @@ module.exports = (__userDoesPretendInvocationHere__, config = {}) ->
     addStubbing(stubbedValues, config, 'thenDo')
   thenThrow: (stubbedValues...) ->
     addStubbing(stubbedValues, config, 'thenThrow')
+  thenResolve: (stubbedValues...) ->
+    addStubbing(stubbedValues, config, 'thenResolve')
+  thenReject: (stubbedValues...) ->
+    addStubbing(stubbedValues, config, 'thenReject')
 
 addStubbing = (stubbedValues, config, plan) ->
   _.assign(config, {plan})

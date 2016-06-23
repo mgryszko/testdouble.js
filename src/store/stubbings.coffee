@@ -27,6 +27,8 @@ executePlan = (stubbing, actualArgs) ->
     when "thenReturn" then value
     when "thenDo" then value(actualArgs...)
     when "thenThrow" then throw value
+    when "thenResolve" then Promise.resolve(value)
+    when "thenReject" then Promise.reject(value)
 
 invokeCallbackFor = (stubbing, actualArgs) ->
   return unless _.some(stubbing.args, callback.isCallback)
